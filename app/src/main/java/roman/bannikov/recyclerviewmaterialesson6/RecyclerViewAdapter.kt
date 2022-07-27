@@ -16,14 +16,14 @@ const val TYPE_CARD = 3
 
 
 class RecyclerViewAdapter(private var list: List<Data>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return list[position].type
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        when (viewType) {
             TYPE_EARTH -> {
                 val view =
                     ActivityRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
@@ -48,18 +48,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItemViewType(position)) { //todo создать BaseViewHolder
-            TYPE_EARTH -> {
-                (holder as EarthViewHolder).myBind(list[position])
-            }
-            TYPE_MARS -> {
-                (holder as MarsViewHolder).bind(list[position])
-            }
-            TYPE_CARD -> {
-                (holder as CardViewHolder).bind(list[position])
-            }
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
@@ -67,8 +57,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
     }
 
     class EarthViewHolder(view: View) :
-        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
-        fun myBind(data: Data) {
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
                 tvDescription.text = data.description
@@ -78,8 +68,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
 
 
     class MarsViewHolder(view: View) :
-        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
-        fun bind(data: Data) {
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
             }
@@ -88,12 +78,14 @@ class RecyclerViewAdapter(private var list: List<Data>) :
 
 
     class CardViewHolder(view: View) :
-        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
-        fun bind(data: Data) {
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemCardBinding.bind(itemView)).apply {
                 tvName.text = data.name
                 tvLastName.text = data.lastName
             }
         }
     }
+
+
 }
