@@ -2,7 +2,9 @@ package roman.bannikov.recyclerviewmaterialesson6
 
 
 data class Data(
-    val someText: String = "Some text",
-    val someDescription: String = "Some description",
+    val titleText: String = "Title text",
+    val description: String = "Description",
+    val name: String?,
+    val lastName: String?,
     val type: Int
 )

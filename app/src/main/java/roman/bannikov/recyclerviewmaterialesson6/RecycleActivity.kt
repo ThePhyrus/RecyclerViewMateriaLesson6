@@ -12,5 +12,21 @@ class RecycleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRecycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val list = arrayListOf(
+            Data("Earth", "Description Earth", "", "", TYPE_EARTH),
+            Data("Earth", "Description Earth", "", "", TYPE_EARTH),
+            Data("Earth", "Description Earth", null, null, TYPE_EARTH),
+
+            Data("Mars", "Description Mars", "", "", TYPE_MARS),
+            Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS),
+            Data("Mars", "Description Mars", null, null, TYPE_MARS),
+
+            Data("Card", "", "Roman", "Bannikov", TYPE_CARD),
+            Data("Card", "1", null, "Bannikov", TYPE_CARD),
+            Data("Card", "", "Roman", null, TYPE_CARD)
+        )
+        binding.recyclerView.adapter = RecyclerViewAdapter(list)
+
     }
 }
