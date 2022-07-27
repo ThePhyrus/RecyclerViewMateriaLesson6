@@ -14,6 +14,7 @@ class RecycleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val list = arrayListOf(
+            Data("Header", null, "", "", TYPE_HEADER),
             Data("Earth", "Description Earth", "", "", TYPE_EARTH),
             Data("Earth", "Description Earth", "", "", TYPE_EARTH),
             Data("Earth", "Description Earth", null, null, TYPE_EARTH),

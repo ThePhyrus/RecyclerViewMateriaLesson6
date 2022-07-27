@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemCardBinding
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemEarthBinding
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemHeaderBinding
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemMarsBinding
 
 
@@ -13,6 +14,7 @@ import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerIte
 const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
 const val TYPE_CARD = 3
+const val TYPE_HEADER = 4
 
 
 class RecyclerViewAdapter(private var list: List<Data>) :
@@ -39,7 +41,11 @@ class RecyclerViewAdapter(private var list: List<Data>) :
                     ActivityRecyclerItemCardBinding.inflate(LayoutInflater.from(parent.context))
                 return CardViewHolder(view.root)
             }
-
+            TYPE_HEADER -> {
+                val view =
+                    ActivityRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
+                return HeaderViewHolder(view.root)
+            }
             else -> {
                 val view =
                     ActivityRecyclerItemCardBinding.inflate(LayoutInflater.from(parent.context))
@@ -83,6 +89,15 @@ class RecyclerViewAdapter(private var list: List<Data>) :
             (ActivityRecyclerItemCardBinding.bind(itemView)).apply {
                 tvName.text = data.name
                 tvLastName.text = data.lastName
+            }
+        }
+    }
+
+    class HeaderViewHolder(view: View) :
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
+            (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
+                tvHeader.text = data.titleText
             }
         }
     }
