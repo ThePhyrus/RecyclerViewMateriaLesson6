@@ -48,7 +48,6 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         }
     }
 
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             TYPE_EARTH -> {
@@ -67,25 +66,26 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         return list.size
     }
 
-
     class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun myBind(data: Data) {
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.tvTitle).text = data.titleText
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.tvDescription).text = data.description
+            val binding = ActivityRecyclerItemEarthBinding.bind(itemView)
+            binding.tvTitle.text = data.titleText
+            binding.tvDescription.text = data.description
         }
-
     }
 
     class MarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data: Data){
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.tvTitle).text = data.titleText
+        fun bind(data: Data) {
+            val binding = ActivityRecyclerItemMarsBinding.bind(itemView)
+            binding.tvTitle.text = data.titleText
         }
     }
 
     class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind (data: Data) {
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.tvName).text = data.name
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.tvLastName).text = data.lastName
+        fun bind(data: Data) {
+            val binding = ActivityRecyclerItemCardBinding.bind(itemView)
+            binding.tvName.text = data.name
+            binding.tvLastName.text = data.lastName
         }
     }
 }
