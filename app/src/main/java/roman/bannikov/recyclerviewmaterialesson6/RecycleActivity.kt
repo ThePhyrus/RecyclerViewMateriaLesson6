@@ -18,14 +18,17 @@ class RecycleActivity : AppCompatActivity() {
             Data("Earth", "Description Earth", "", "", TYPE_EARTH),
             Data("Earth", "Description Earth", "", "", TYPE_EARTH),
             Data("Earth", "Description Earth", null, null, TYPE_EARTH),
-
             Data("Mars", "Description Mars", "", "", TYPE_MARS),
+            Data("Solyanka", "Just in case", "Romka", "Bant", TYPE_SOLYANKA),
             Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS),
+            Data("Solyanka", "Just in case", "Romka", "Bant", TYPE_SOLYANKA),
             Data("Mars", "Description Mars", null, null, TYPE_MARS),
-
             Data("Card", "", "Roman", "Bannikov", TYPE_CARD),
+
             Data("Card", "1", null, "Bannikov", TYPE_CARD),
-            Data("Card", "", "Roman", null, TYPE_CARD)
+            Data("Solyanka", "Just in case", "Romka", "Bant", TYPE_SOLYANKA),
+            Data("Card", "", "Roman", null, TYPE_CARD),
+            Data("Solyanka", "Just in case", "Romka", "Bant", TYPE_SOLYANKA)
         )
         binding.recyclerView.adapter = RecyclerViewAdapter(list)
 

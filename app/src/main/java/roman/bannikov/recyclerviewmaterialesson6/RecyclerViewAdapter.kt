@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemCardBinding
-import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemEarthBinding
-import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemHeaderBinding
-import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemMarsBinding
+import roman.bannikov.recyclerviewmaterialesson6.databinding.*
 
 
 //FIXME лучше бы использовать sealed-class вместо констант? Как это реализовать?
@@ -15,6 +12,7 @@ const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
 const val TYPE_CARD = 3
 const val TYPE_HEADER = 4
+const val TYPE_SOLYANKA = 5
 
 
 class RecyclerViewAdapter(private var list: List<Data>) :
@@ -45,6 +43,11 @@ class RecyclerViewAdapter(private var list: List<Data>) :
                 val view =
                     ActivityRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
                 return HeaderViewHolder(view.root)
+            }
+            TYPE_SOLYANKA -> {
+                val view =
+                    ActivityRecyclerItemSolyankaBinding.inflate(LayoutInflater.from(parent.context))
+                return SolyankaViewHolder(view.root)
             }
             else -> {
                 val view =
@@ -98,6 +101,18 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         override fun bind(data: Data) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
                 tvHeader.text = data.titleText
+            }
+        }
+    }
+
+    class SolyankaViewHolder(view: View) :
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
+            (ActivityRecyclerItemSolyankaBinding.bind(itemView)).apply {
+                tvTitle.text = data.titleText
+                tvName.text = data.name
+                tvLastName.text = data.lastName
+                tvDescription.text = data.description
             }
         }
     }
