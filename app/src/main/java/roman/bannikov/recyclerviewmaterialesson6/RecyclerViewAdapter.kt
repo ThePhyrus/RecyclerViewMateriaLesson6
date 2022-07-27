@@ -3,13 +3,13 @@ package roman.bannikov.recyclerviewmaterialesson6
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemCardBinding
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemEarthBinding
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemMarsBinding
 
+
+//FIXME лучше бы использовать sealed-class вместо констант? Как это реализовать?
 const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
 const val TYPE_CARD = 3
@@ -49,7 +49,7 @@ class RecyclerViewAdapter(private var list: List<Data>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (getItemViewType(position)) {
+        when (getItemViewType(position)) { //todo создать BaseViewHolder
             TYPE_EARTH -> {
                 (holder as EarthViewHolder).myBind(list[position])
             }
@@ -66,7 +66,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         return list.size
     }
 
-    class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class EarthViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
         fun myBind(data: Data) {
             (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
@@ -76,7 +77,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
     }
 
 
-    class MarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class MarsViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
         fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
@@ -85,7 +87,8 @@ class RecyclerViewAdapter(private var list: List<Data>) :
     }
 
 
-    class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CardViewHolder(view: View) :
+        RecyclerView.ViewHolder(view) {  //todo наследовать BaseViewHolder
         fun bind(data: Data) {
             (ActivityRecyclerItemCardBinding.bind(itemView)).apply {
                 tvName.text = data.name
