@@ -12,10 +12,11 @@ const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
 const val TYPE_CARD = 3
 const val TYPE_HEADER = 4
-const val TYPE_SOLYANKA = 5
 
 
-class RecyclerViewAdapter(private var list: List<Data>) :
+class RecyclerViewAdapter(
+    private var list: List<Data>
+) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -44,11 +45,7 @@ class RecyclerViewAdapter(private var list: List<Data>) :
                     ActivityRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
                 return HeaderViewHolder(view.root)
             }
-            TYPE_SOLYANKA -> {
-                val view =
-                    ActivityRecyclerItemSolyankaBinding.inflate(LayoutInflater.from(parent.context))
-                return SolyankaViewHolder(view.root)
-            }
+
             else -> {
                 val view =
                     ActivityRecyclerItemCardBinding.inflate(LayoutInflater.from(parent.context))
@@ -65,6 +62,21 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         return list.size
     }
 
+
+
+
+    class MarsViewHolder(view: View) :
+        BaseViewHolder(view) {
+        override fun bind(data: Data) {
+            (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
+                tvTitle.text = data.titleText
+
+
+            }
+        }
+    }
+
+
     class EarthViewHolder(view: View) :
         BaseViewHolder(view) {
         override fun bind(data: Data) {
@@ -74,17 +86,6 @@ class RecyclerViewAdapter(private var list: List<Data>) :
             }
         }
     }
-
-
-    class MarsViewHolder(view: View) :
-        BaseViewHolder(view) {
-        override fun bind(data: Data) {
-            (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
-                tvTitle.text = data.titleText
-            }
-        }
-    }
-
 
     class CardViewHolder(view: View) :
         BaseViewHolder(view) {
@@ -101,18 +102,6 @@ class RecyclerViewAdapter(private var list: List<Data>) :
         override fun bind(data: Data) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
                 tvHeader.text = data.titleText
-            }
-        }
-    }
-
-    class SolyankaViewHolder(view: View) :
-        BaseViewHolder(view) {
-        override fun bind(data: Data) {
-            (ActivityRecyclerItemSolyankaBinding.bind(itemView)).apply {
-                tvTitle.text = data.titleText
-                tvName.text = data.name
-                tvLastName.text = data.lastName
-                tvDescription.text = data.description
             }
         }
     }

@@ -1,0 +1,4 @@
+package roman.bannikov.recyclerviewmaterialesson6
+
+import android.view.View
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemEarthBinding
