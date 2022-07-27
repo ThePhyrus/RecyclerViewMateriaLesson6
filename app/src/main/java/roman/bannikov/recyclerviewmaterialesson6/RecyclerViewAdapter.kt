@@ -68,24 +68,29 @@ class RecyclerViewAdapter(private var list: List<Data>) :
 
     class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun myBind(data: Data) {
-            val binding = ActivityRecyclerItemEarthBinding.bind(itemView)
-            binding.tvTitle.text = data.titleText
-            binding.tvDescription.text = data.description
+            (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
+                tvTitle.text = data.titleText
+                tvDescription.text = data.description
+            }
         }
     }
+
 
     class MarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: Data) {
-            val binding = ActivityRecyclerItemMarsBinding.bind(itemView)
-            binding.tvTitle.text = data.titleText
+            (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
+                tvTitle.text = data.titleText
+            }
         }
     }
 
+
     class CardViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: Data) {
-            val binding = ActivityRecyclerItemCardBinding.bind(itemView)
-            binding.tvName.text = data.name
-            binding.tvLastName.text = data.lastName
+            (ActivityRecyclerItemCardBinding.bind(itemView)).apply {
+                tvName.text = data.name
+                tvLastName.text = data.lastName
+            }
         }
     }
 }
