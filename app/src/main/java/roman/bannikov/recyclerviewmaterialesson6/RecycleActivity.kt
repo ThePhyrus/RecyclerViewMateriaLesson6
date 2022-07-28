@@ -10,7 +10,7 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     private lateinit var adapter: RecyclerViewAdapter
 
     private val list = arrayListOf(
-        Data("Earth", "Description Earth", "", "", TYPE_EARTH),
+        Data("Planets", "Description Earth", "", "", TYPE_HEADER),
         Data("Earth", "Description Earth", "", "", TYPE_EARTH),
         Data("Earth", "Description Earth", null, null, TYPE_EARTH),
         Data("Mars", "Description Mars", "", "", TYPE_MARS),

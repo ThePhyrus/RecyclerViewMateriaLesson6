@@ -15,23 +15,23 @@ const val TYPE_HEADER = 4
 
 
 class RecyclerViewAdapter(
-private var onListItemClickListener: OnListItemClickListener
+    private var onListItemClickListener: OnListItemClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
-    private lateinit var list: List<Data>
+    private lateinit var list: MutableList<Data>
 
-    fun setList(newList: List<Data>){
-        this.list = newList
+    fun setList(newList: List<Data>) {
+        this.list = newList.toMutableList()
     }
 
-    fun setAddToList (newList: List<Data>, position: Int) {
-        this.list = newList
+    fun setAddToList(newList: List<Data>, position: Int) {
+        this.list = newList.toMutableList()
         notifyItemChanged(position)
-//        notifyDataSetChanged()
     }
-    fun setRemoveToList (newList: List<Data>, position: Int) {
-        this.list = newList
+
+    fun setRemoveToList(newList: List<Data>, position: Int) {
+        this.list = newList.toMutableList()
         notifyItemRemoved(position)
     }
 
@@ -80,7 +80,7 @@ private var onListItemClickListener: OnListItemClickListener
     }
 
 
-   inner class MarsViewHolder(view: View) :
+    inner class MarsViewHolder(view: View) :
         BaseViewHolder(view) {
         override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
@@ -90,6 +90,22 @@ private var onListItemClickListener: OnListItemClickListener
                 }
                 btnRemoveItem.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
+                }
+                btnMoveUp.setOnClickListener {
+                    if (layoutPosition > 1) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition - 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition - 1)
+                    }
+                }
+                btnMoveDown.setOnClickListener {
+                    if (layoutPosition + 1 in list.indices) {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition + 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition + 1)
+                    }
                 }
             }
         }
