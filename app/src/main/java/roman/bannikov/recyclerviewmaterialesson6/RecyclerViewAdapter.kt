@@ -15,9 +15,26 @@ const val TYPE_HEADER = 4
 
 
 class RecyclerViewAdapter(
-    private var list: List<Data>
+private var onListItemClickListener: OnListItemClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
+
+    private lateinit var list: List<Data>
+
+    fun setList(newList: List<Data>){
+        this.list = newList
+    }
+
+    fun setAddToList (newList: List<Data>, position: Int) {
+        this.list = newList
+        notifyItemChanged(position)
+//        notifyDataSetChanged()
+    }
+    fun setRemoveToList (newList: List<Data>, position: Int) {
+        this.list = newList
+        notifyItemRemoved(position)
+    }
+
 
     override fun getItemViewType(position: Int): Int {
         return list[position].type
@@ -63,15 +80,17 @@ class RecyclerViewAdapter(
     }
 
 
-
-
-    class MarsViewHolder(view: View) :
+   inner class MarsViewHolder(view: View) :
         BaseViewHolder(view) {
         override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
-
-
+                btnAddItem.setOnClickListener {
+                    onListItemClickListener.onAddBtnClick(layoutPosition)
+                }
+                btnRemoveItem.setOnClickListener {
+                    onListItemClickListener.onRemoveBtnClick(layoutPosition)
+                }
             }
         }
     }
