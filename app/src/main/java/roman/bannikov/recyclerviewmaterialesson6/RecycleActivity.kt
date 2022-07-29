@@ -10,15 +10,15 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     private lateinit var adapter: RecyclerViewAdapter
 
     private val list = arrayListOf(
-        Data("Planets", "Description Earth", "", "", TYPE_HEADER),
-        Data("Earth", "Description Earth", "", "", TYPE_EARTH),
-        Data("Earth", "Description Earth", null, null, TYPE_EARTH),
-        Data("Mars", "Description Mars", "", "", TYPE_MARS),
-        Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS),
-        Data("Mars", "Description Mars", null, null, TYPE_MARS),
-        Data("Card", "", "Roman", "Bannikov", TYPE_CARD),
-        Data("Card", "1", null, "Bannikov", TYPE_CARD),
-        Data("Card", "", "Roman", null, TYPE_CARD),
+        Pair(Data("Planets", "Description Earth", "", "", TYPE_HEADER), false),
+        Pair(Data("Earth", "Description Earth", "", "", TYPE_EARTH), false),
+        Pair(Data("Earth", "Description Earth", null, null, TYPE_EARTH), false),
+        Pair(Data("Mars", "Description Mars", "", "", TYPE_MARS), false),
+        Pair(Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS), false),
+        Pair(Data("Mars", "Description Mars", null, null, TYPE_MARS), false),
+        Pair(Data("Card", "", "Roman", "Bannikov", TYPE_CARD), false),
+        Pair(Data("Card", "1", null, "Bannikov", TYPE_CARD), false),
+        Pair(Data("Card", "", "Roman", null, TYPE_CARD), false)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +26,23 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         binding = ActivityRecycleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Объединение свойств? Или как это называется?
+        val lon = 1
+        val lat = 2
+        val t = 20
+        //1 sposob
+        // (Pair)
+        val loc = Pair(lon, lat)
+        // (Triple)
+        val weather = Triple(lon, lat, t)
+        //2 sposob
+        // (Pair)
+        val loc2 = lat to lon
+        // (Triple)
+        val weather2 = lat to lon to t
 
-
-
-
+        loc2.first
+        loc2.second
 
 
         adapter = RecyclerViewAdapter(this)
@@ -47,7 +60,7 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     }
 
     override fun onAddBtnClick(position: Int) {
-        list.add(position, Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS))
+        list.add(position,  Pair(Data("Mars", "Description Mars", "", "", TYPE_MARS), false))
         adapter.setAddToList(list, position)
     }
 
