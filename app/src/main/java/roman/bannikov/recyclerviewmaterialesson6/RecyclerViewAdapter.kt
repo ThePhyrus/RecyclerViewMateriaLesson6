@@ -17,7 +17,7 @@ const val TYPE_HEADER = 4
 class RecyclerViewAdapter(
     private var onListItemClickListener: OnListItemClickListener
 ) :
-    RecyclerView.Adapter<BaseViewHolder>() {
+    RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
     private lateinit var list: MutableList<Data>
 
@@ -150,6 +150,19 @@ class RecyclerViewAdapter(
                 tvHeader.text = data.titleText
             }
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+
+        list.removeAt(fromPosition).apply {
+            list.add(toPosition, this)
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        list.removeAt(position) //Лучше (правильней) это делать не внутри адаптера!!!
+        notifyItemRemoved(position)
     }
 
 

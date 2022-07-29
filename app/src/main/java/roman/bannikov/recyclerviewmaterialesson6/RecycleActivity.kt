@@ -2,6 +2,7 @@ package roman.bannikov.recyclerviewmaterialesson6
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecycleBinding
 
 class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
@@ -40,7 +41,6 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         val loc2 = lat to lon
         // (Triple)
         val weather2 = lat to lon to t
-
         loc2.first
         loc2.second
 
@@ -52,6 +52,12 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         binding.fab.setOnClickListener {
             onAddBtnClick(list.size)
         }
+
+        //JUST REMEMBER!!! Чтобы все тапы по экрану обрабатывал ItemTouchHelper, а все результаты
+        // передавались через колбэк в наш адаптер. (video 02:51:00)
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
+        //JUST REMEMBER!!!
+
 
     }
 
