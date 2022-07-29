@@ -27,6 +27,11 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         setContentView(binding.root)
 
 
+
+
+
+
+
         adapter = RecyclerViewAdapter(this)
         adapter.setList(list)
         binding.recyclerView.adapter = adapter

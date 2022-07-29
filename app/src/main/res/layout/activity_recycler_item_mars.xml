@@ -10,6 +10,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_mars" />
 
@@ -29,8 +30,9 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMoveDown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
         app:srcCompat="@drawable/ic_remove_item" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -57,9 +59,23 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf ="@id/btnRemoveItem"
-        app:layout_constraintTop_toTopOf="@id/btnRemoveItem"
+        app:layout_constraintEnd_toStartOf="@id/btnRemoveItem"
+        app:layout_constraintStart_toStartOf="@+id/btnMoveUp"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"
         app:srcCompat="@drawable/ic_down" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        tools:visibility="visible"
+        android:text="@string/mars_description_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivMars"
+        android:id="@+id/tvMarsDescription"/>
 
     <View
         android:id="@+id/line1px"

@@ -82,6 +82,7 @@ class RecyclerViewAdapter(
 
     inner class MarsViewHolder(view: View) :
         BaseViewHolder(view) {
+        private var isMarsDescriptionHidden = true
         override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 tvTitle.text = data.titleText
@@ -106,6 +107,14 @@ class RecyclerViewAdapter(
                         }
                         notifyItemMoved(layoutPosition, layoutPosition + 1)
                     }
+                }
+                ivMars.setOnClickListener {
+                    if (isMarsDescriptionHidden) {
+                        tvMarsDescription.visibility = View.VISIBLE
+                    } else {
+                        tvMarsDescription.visibility = View.GONE
+                    }
+                    isMarsDescriptionHidden = !isMarsDescriptionHidden
                 }
             }
         }
