@@ -19,25 +19,25 @@ class RecyclerViewAdapter(
 ) :
     RecyclerView.Adapter<BaseViewHolder>() {
 
-    private lateinit var list: MutableList<Pair<Data, Boolean>>
+    private lateinit var list: MutableList<Data>
 
-    fun setList(newList: List<Pair<Data, Boolean>>) {
+    fun setList(newList: MutableList<Data>) {
         this.list = newList.toMutableList()
     }
 
-    fun setAddToList(newList: List<Pair<Data, Boolean>>, position: Int) {
+    fun setAddToList(newList: MutableList<Data>, position: Int) {
         this.list = newList.toMutableList()
         notifyItemChanged(position)
     }
 
-    fun setRemoveToList(newList: List<Pair<Data, Boolean>>, position: Int) {
+    fun setRemoveToList(newList: MutableList<Data>, position: Int) {
         this.list = newList.toMutableList()
         notifyItemRemoved(position)
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        return list[position].first.type
+        return list[position].type
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
@@ -83,9 +83,9 @@ class RecyclerViewAdapter(
     inner class MarsViewHolder(view: View) :
         BaseViewHolder(view) {
         private var isMarsDescriptionHidden = true
-        override fun bind(listItem: Pair<Data, Boolean>) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
-                tvTitle.text = listItem.first.titleText
+                tvTitle.text = data.titleText
                 btnAddItem.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(layoutPosition)
                 }
@@ -109,12 +109,14 @@ class RecyclerViewAdapter(
                     }
                 }
                 ivMars.setOnClickListener {
-                    list[layoutPosition] = list[layoutPosition].let {
-                        it.first to !it.second
+                    if (isMarsDescriptionHidden){
+                        tvMarsDescription.visibility = View.VISIBLE
+//                        notifyItemChanged(layoutPosition)
+                    } else {
+                        tvMarsDescription.visibility = View.GONE
+//                        notifyItemChanged(layoutPosition)
                     }
-                    tvMarsDescription.visibility =
-                        if (list[layoutPosition].second) View.VISIBLE else View.GONE
-//                    notifyItemChanged(layoutPosition)//FIXME криво анимируется не с первого клика
+                    isMarsDescriptionHidden = !isMarsDescriptionHidden
                 }
             }
         }
@@ -123,29 +125,29 @@ class RecyclerViewAdapter(
 
     class EarthViewHolder(view: View) :
         BaseViewHolder(view) {
-        override fun bind(listItem: Pair<Data, Boolean>) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
-                tvTitle.text = listItem.first.titleText
-                tvDescription.text = listItem.first.description
+                tvTitle.text = data.titleText
+                tvDescription.text = data.description
             }
         }
     }
 
     class CardViewHolder(view: View) :
         BaseViewHolder(view) {
-        override fun bind(listItem: Pair<Data, Boolean>) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemCardBinding.bind(itemView)).apply {
-                tvName.text = listItem.first.name
-                tvLastName.text = listItem.first.lastName
+                tvName.text = data.name
+                tvLastName.text = data.lastName
             }
         }
     }
 
     class HeaderViewHolder(view: View) :
         BaseViewHolder(view) {
-        override fun bind(listItem: Pair<Data, Boolean>) {
+        override fun bind(data: Data) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
-                tvHeader.text = listItem.first.titleText
+                tvHeader.text = data.titleText
             }
         }
     }

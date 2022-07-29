@@ -10,15 +10,15 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     private lateinit var adapter: RecyclerViewAdapter
 
     private val list = arrayListOf(
-        Pair(Data("Planets", "Description Earth", "", "", TYPE_HEADER), false),
-        Pair(Data("Earth", "Description Earth", "", "", TYPE_EARTH), false),
-        Pair(Data("Earth", "Description Earth", null, null, TYPE_EARTH), false),
-        Pair(Data("Mars", "Description Mars", "", "", TYPE_MARS), false),
-        Pair(Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS), false),
-        Pair(Data("Mars", "Description Mars", null, null, TYPE_MARS), false),
-        Pair(Data("Card", "", "Roman", "Bannikov", TYPE_CARD), false),
-        Pair(Data("Card", "1", null, "Bannikov", TYPE_CARD), false),
-        Pair(Data("Card", "", "Roman", null, TYPE_CARD), false)
+       Data("Planets", "Description Earth", "", "", TYPE_HEADER),
+       Data("Earth", "Description Earth", "", "", TYPE_EARTH),
+       Data("Earth", "Description Earth", null, null, TYPE_EARTH),
+       Data("Mars", "Description Mars", "", "", TYPE_MARS),
+       Data("Mars", "Description Mars 1", "1", "1", TYPE_MARS),
+       Data("Mars", "Description Mars", null, null, TYPE_MARS),
+       Data("Card", "", "Roman", "Bannikov", TYPE_CARD),
+       Data("Card", "1", null, "Bannikov", TYPE_CARD),
+       Data("Card", "", "Roman", null, TYPE_CARD)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +60,7 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     }
 
     override fun onAddBtnClick(position: Int) {
-        list.add(position,  Pair(Data("Mars", "Description Mars", "", "", TYPE_MARS), false))
+        list.add(position, Data("Mars", "Description Mars", "", "", TYPE_MARS),)
         adapter.setAddToList(list, position)
     }
 
