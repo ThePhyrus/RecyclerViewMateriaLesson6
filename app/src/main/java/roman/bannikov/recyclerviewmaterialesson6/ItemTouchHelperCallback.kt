@@ -3,7 +3,7 @@ package roman.bannikov.recyclerviewmaterialesson6
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemTouchHelperCallback(private val adapter: RecyclerViewAdapter) :
+class ItemTouchHelperCallback(private val itemTouchHelperAdapter: ItemTouchHelperAdapter) :
     ItemTouchHelper.Callback() {
 
     override fun getMovementFlags( //тут описываются направления (куда тащить, куда свайпить)
@@ -20,12 +20,24 @@ class ItemTouchHelperCallback(private val adapter: RecyclerViewAdapter) :
         sourse: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        adapter.onItemMove(sourse.adapterPosition,target.adapterPosition)
+        itemTouchHelperAdapter.onItemMove(sourse.adapterPosition, target.adapterPosition)
         return true //когда не знаешь о чём речь - пиши тру)) Андрей Нестеренко (преподаватель GB).
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        adapter.onItemDismiss(viewHolder.adapterPosition)
+        itemTouchHelperAdapter.onItemDismiss(viewHolder.adapterPosition)
     }
 
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        if (viewHolder is RecyclerViewAdapter.MarsViewHolder) {
+                (viewHolder as RecyclerViewAdapter.MarsViewHolder).onItemSelected()
+            super.onSelectedChanged(viewHolder, actionState)
+        }
+    }
+
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        if  (viewHolder is RecyclerViewAdapter.MarsViewHolder)
+        (viewHolder as RecyclerViewAdapter.MarsViewHolder).onItemReleased()
+        super.clearView(recyclerView, viewHolder)
+    }
 }

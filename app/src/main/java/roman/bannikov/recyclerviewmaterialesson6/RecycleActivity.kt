@@ -62,7 +62,7 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
     }
 
     override fun onItemClick(data: Data) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onAddBtnClick(position: Int) {

@@ -1,5 +1,6 @@
 package roman.bannikov.recyclerviewmaterialesson6
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +82,7 @@ class RecyclerViewAdapter(
 
 
     inner class MarsViewHolder(view: View) :
-        BaseViewHolder(view) {
+        BaseViewHolder(view), ItemTouchHelperViewHolder {
         private var isMarsDescriptionHidden = true
         override fun bind(data: Data) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
@@ -119,6 +120,14 @@ class RecyclerViewAdapter(
                     isMarsDescriptionHidden = !isMarsDescriptionHidden
                 }
             }
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemReleased() {
+            itemView.setBackgroundColor(0)
         }
     }
 
