@@ -44,7 +44,6 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         loc2.first
         loc2.second
 
-
         adapter = RecyclerViewAdapter(this)
         adapter.setList(list)
         binding.recyclerView.adapter = adapter
@@ -57,7 +56,6 @@ class RecycleActivity : AppCompatActivity(), OnListItemClickListener {
         // передавались через колбэк в наш адаптер. (video 02:51:00)
         ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
         //JUST REMEMBER!!!
-
 
     }
 
