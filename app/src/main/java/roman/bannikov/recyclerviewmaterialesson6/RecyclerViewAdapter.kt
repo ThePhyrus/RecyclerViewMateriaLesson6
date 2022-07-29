@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import roman.bannikov.recyclerviewmaterialesson6.databinding.*
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemCardBinding
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemEarthBinding
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemHeaderBinding
+import roman.bannikov.recyclerviewmaterialesson6.databinding.ActivityRecyclerItemMarsBinding
 
 
 //FIXME лучше бы использовать sealed-class вместо констант? Как это реализовать?
